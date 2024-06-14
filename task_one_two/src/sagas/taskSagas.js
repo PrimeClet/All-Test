@@ -14,9 +14,8 @@ import {
     REMOVE_TASK_FAILURE,
 } from '../actions/taskActions';
 
-
 // API calls (replace with actual API URLs)
-const fetchTasksApi = () => fetch('https://dummyjson.com/todos').then(response => response.json());
+const fetchTasksApi = () => fetch('https://dummyjson.com/todos?limit=5&skip=10').then(response => response.json());
 const addTaskApi = (task) => fetch('https://dummyjson.com/todos/add', {
     method: 'POST',
     body: JSON.stringify(task),
@@ -24,7 +23,9 @@ const addTaskApi = (task) => fetch('https://dummyjson.com/todos/add', {
 }).then(response => response.json());
 const updateTaskApi = (task) => fetch(`https://dummyjson.com/todos/${task.id}`, {
     method: 'PUT',
-    body: JSON.stringify(task),
+    body: JSON.stringify({
+        completed: true,
+    }),
     headers: { 'Content-Type': 'application/json' }
 }).then(response => response.json());
 const removeTaskApi = (taskId) => fetch(`https://dummyjson.com/todos/${taskId}`, {
